@@ -1,0 +1,14 @@
+# Ignore OS and editor temp files
+Thumbs.db
+Desktop.ini
+*.bak
+*.tmp
+*.log
+*.sock
+
+# Sensitive files / keys
+*.pem
+*.key
+*.pfx
+id_rsa*
+id_ed25519*

@@ -1,0 +1,80 @@
+[general]
+live_config_reload = true
+import = [
+    "C:\\Users\\lumos\\AppData\\Roaming\\alacritty\\theme.toml"
+]
+
+[env]
+TERM = "xterm-256color"
+
+# Default terminal / shell configuration
+# Alacritty launches Herdr directly so your workspace manager opens immediately.
+# Inside Herdr, every pane and tab is configured to run PowerShell 7 (pwsh).
+[terminal.shell]
+program = "C:\\Users\\lumos\\AppData\\Local\\Programs\\Herdr\\bin\\herdr.exe"
+
+# If you ever want to launch plain PowerShell 7 directly instead of Herdr,
+# comment out the line above and uncomment the lines below:
+# program = "C:\\Program Files\\PowerShell\\7\\pwsh.exe"
+# args = ["-NoLogo"]
+
+[font]
+size = 9.5
+
+[font.normal]
+family = "JetBrainsMono NF"
+style = "Medium"
+
+[font.bold]
+family = "JetBrainsMono NF"
+style = "Bold"
+
+[font.italic]
+family = "JetBrainsMono NF"
+style = "Medium Italic"
+
+[font.bold_italic]
+family = "JetBrainsMono NF"
+style = "Bold Italic"
+
+# Optional alternative: FiraCode Nerd Font
+# [font.normal]
+# family = "FiraCode Nerd Font"
+# style = "Medium"
+
+[window]
+decorations = "buttonless"
+dynamic_padding = false
+opacity = 0.95
+blur = true
+
+[window.padding]
+x = 12
+y = 10
+
+[cursor]
+style = { shape = "Beam", blinking = "On" }
+blink_interval = 500
+unfocused_hollow = true
+
+[scrolling]
+history = 10000
+multiplier = 3
+
+# Colors are loaded dynamically from theme.toml above
+
+[[keyboard.bindings]]
+key = "V"
+mods = "Control|Shift"
+action = "Paste"
+
+[[keyboard.bindings]]
+key = "V"
+mods = "Control"
+action = "Paste"
+
+[[keyboard.bindings]]
+key = "C"
+mods = "Control|Shift"
+action = "Copy"
+

@@ -1,0 +1,15 @@
+onboarding = false
+[update]
+channel = "preview"
+
+[theme]
+name = "kanagawa"
+auto_switch = false
+
+[terminal]
+default_shell = "pwsh"
+
+
+
+
+
