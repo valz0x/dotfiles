@@ -5,6 +5,11 @@ Desktop.ini
 *.tmp
 *.log
 *.sock
+.DS_Store
+
+# Neovim plugin cache
+nvim/lazy/
+lazy/
 
 # Sensitive files / keys
 *.pem

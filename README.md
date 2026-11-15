@@ -1,67 +1,97 @@
-# ⚡ Dotfiles (Windows)
+# ⚡ Cross-Platform Dotfiles (Windows & Linux)
 
-Personal configurations for **Alacritty**, **Herdr**, and **PowerShell 7 (`pwsh`)**.
-
-## 🛠 Features
-
-- **Alacritty Terminal**:
-  - GPU-accelerated with acrylic/mica blur and borderless window.
-  - Font: `JetBrainsMono Nerd Font` (with crisp glyphs and ligature support).
-  - Dynamic live theming via `theme.toml` import.
-  - Launches directly into Herdr session.
-- **Herdr Workspace Manager**:
-  - Persistent terminal workspace manager for AI coding agents.
-  - Catppuccin Mocha theme.
-  - Spawns PowerShell 7 (`pwsh`) inside every pane and tab.
-- **PowerShell 7 (`pwsh`)**:
-  - Complete profile (`Microsoft.PowerShell_profile.ps1`) with emacs keybindings and optimizations.
-  - Custom `theme` command for instant fuzzy theme switching across Alacritty & Herdr.
-  - Custom functions and auto-cd in `Utils.ps1`.
-  - PowerShell engine configuration (`powershell.config.json`).
-  - Oh-My-Posh themes (`zash.omp.json`, `poshv1.json`, `poshv2.json`).
-- **Dynamic Theming (`theme`)**:
-  - 9 pre-configured themes: `catppuccin`, `tokyo-night`, `dracula`, `nord`, `gruvbox`, `one-dark`, `rose-pine`, `solarized`, `kanagawa`.
-  - Type `theme` for an interactive fuzzy-search picker (`fzf`), or `theme <name>` to switch live.
+Unified personal configurations for **Neovim**, **Alacritty**, **Herdr**, **WezTerm**, **PowerShell 7**, and **Ghostty**.
 
 ---
 
-## 📂 Structure
+## 📂 Configuration Matrix
+
+| Tool | Platform | Target Location (Windows) | Target Location (Linux) |
+|---|---|---|---|
+| **Neovim (`nvim`)** | 🌐 Shared | `%LOCALAPPDATA%\nvim` | `~/.config/nvim` |
+| **Alacritty** | 🌐 Shared | `%APPDATA%\alacritty` | `~/.config/alacritty` |
+| **Herdr** | 🌐 Shared | `%APPDATA%\herdr` | `~/.config/herdr` |
+| **Ghostty** | 🐧 Linux | — | `~/.config/ghostty/config` |
+| **WezTerm** | 🪟 Windows | `~/.config/wezterm` | — |
+| **PowerShell 7** | 🪟 Windows | `~/Documents/PowerShell` | — |
+
+---
+
+## 📁 Repository Structure
 
 ```text
 dotfiles/
-├── alacritty/
-│   ├── alacritty.toml                    # Main Alacritty configuration
-│   ├── theme.toml                        # Active theme (imported dynamically)
-│   └── themes/                           # 9 matching color schemes
-├── herdr/
-│   └── config.toml                       # Herdr server & terminal configuration
-├── powershell/
-│   ├── Microsoft.PowerShell_profile.ps1  # Main PowerShell 7 profile
-│   ├── powershell.config.json            # Engine options & experimental features
-│   ├── Utils.ps1                         # Shell utility functions
-│   ├── zash.omp.json                     # Custom Oh-My-Posh prompt theme
-│   ├── poshv1.json                       # Oh-My-Posh preset 1
-│   └── poshv2.json                       # Oh-My-Posh preset 2
-├── install.ps1                           # Deploys dotfiles to local system
-├── sync.ps1                              # Pulls live configs into this repo
-└── README.md
+├── alacritty/                  # [SHARED] Alacritty config, live theme picker, 9 themes
+│   ├── alacritty.toml
+│   ├── theme.toml
+│   └── themes/
+├── herdr/                      # [SHARED] Herdr terminal workspace manager
+│   └── config.toml
+├── nvim/                       # [SHARED] Neovim config (Lazy, LSP, DAP, Treesitter)
+│   ├── init.lua
+│   └── lua/
+├── ghostty/                    # [LINUX ONLY] Ghostty terminal config
+│   └── config
+├── wezterm/                    # [WINDOWS ONLY] WezTerm modular config
+│   ├── wezterm.lua
+│   └── config/
+├── powershell/                 # [WINDOWS ONLY] PowerShell profile & utilities
+│   ├── Microsoft.PowerShell_profile.ps1
+│   ├── Utils.ps1
+│   ├── powershell.config.json
+│   ├── install-modules.ps1     # Automated installer for required PS modules
+│   └── *.omp.json              # Oh-My-Posh themes
+├── configs/                    # Preserved configs & snippets from OneDrive share
+│   ├── i3-config-part.md       # Linux i3wm cheat sheet & shortcuts
+│   ├── httpd-vhosts.conf
+│   └── ...
+├── install.ps1                 # Windows deployment script
+├── sync.ps1                    # Windows sync script (pulls live configs into repo)
+├── install.sh                  # Linux deployment script (symlinks into ~/.config)
+└── sync.sh                     # Linux sync script (pulls live configs into repo)
 ```
 
 ---
 
-## 🚀 Quick Start
+## 🚀 Installation & Usage
 
-### 1. Install / Restore on a New Machine
-Clone this repository and run:
+### 🪟 On Windows
+Open PowerShell 7 in this folder:
+
 ```powershell
+# 1. Deploy all Windows configurations
 .\install.ps1
+
+# 2. (First-time only) Automatically install PowerShell modules & tools
+.\powershell\install-modules.ps1
+# (or run: .\install.ps1 -InstallModules)
 ```
 
-### 2. Update Dotfiles After Making Changes
-When you tweak your configs or themes on your machine, sync the repo:
+**Syncing your latest Windows tweaks back into git:**
 ```powershell
 .\sync.ps1
-git add .
-git commit -m "Update configs"
+git commit -am "Update configs"
+git push
+```
+
+---
+
+### 🐧 On Linux
+Clone the repo on your Linux machine:
+
+```bash
+git clone https://github.com/valz0x/dotfiles.git ~/.dotfiles
+cd ~/.dotfiles
+
+# Make scripts executable and run installer
+chmod +x install.sh sync.sh
+./install.sh
+```
+This symlinks `nvim`, `alacritty`, `herdr`, and `ghostty` directly into `~/.config/`. Any edits you make in your editors will be live immediately!
+
+**Syncing Linux tweaks back into git:**
+```bash
+./sync.sh
+git commit -am "Update linux configs"
 git push
 ```
