@@ -24,7 +24,8 @@ Set-PSReadLineOption -EditMode emacs
 
 # oh-my-posh init pwsh --config "$env:posh_themes_path\p10k_classic.omp.json" | invoke-expression
 
-oh-my-posh --init --shell pwsh --config "$env:posh_themes_path\zash.omp.json" | Invoke-Expression
+# oh-my-posh --init --shell pwsh --config "$env:posh_themes_path\zash.omp.json" | Invoke-Expression
+oh-my-posh --init --shell pwsh --config "~/.config/oh-my-posh/amro.omp.json" | Invoke-Expression
 
 $originalPrompt = $function:prompt
 function prompt {
@@ -736,6 +737,7 @@ Set-PSReadLineKeyHandler -Key Ctrl+Shift+t `
     [Microsoft.PowerShell.PSConsoleReadLine]::AcceptLine()
 }
 Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t' -PSReadlineChordReverseHistory 'Ctrl+r'
+Set-PsFzfOption -PSReadlineChordSetLocation 'Alt+c'
 Set-PSReadLineKeyHandler -Key Tab -ScriptBlock { Invoke-FzfTabCompletion }
 
 
